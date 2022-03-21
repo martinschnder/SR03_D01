@@ -27,6 +27,10 @@ public class ServerThread extends Thread {
 
             while (true) {
                 String outputString = input.readLine();
+                if (outputString == null) {
+                    System.out.println("A client has disconnected");
+                    break;
+                }
                 if (outputString.equals("exit")) {
                     break;
                 }
