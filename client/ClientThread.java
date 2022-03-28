@@ -12,7 +12,7 @@ public class ClientThread extends Thread {
 
     public ClientThread(Socket socket) throws IOException {
         this.socket = socket;
-        this.input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        this.input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
     }
 
     @Override
@@ -20,6 +20,9 @@ public class ClientThread extends Thread {
         try {
             while (true) {
                 String response = input.readLine();
+                if (response == null) {
+                    System.out.println("Server has disconnected");
+                }
                 System.out.println(response);
             }
         } catch (IOException e) {
