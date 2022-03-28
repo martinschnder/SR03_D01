@@ -38,9 +38,8 @@ public class ServerThread extends Thread {
                 if (outputString.equals("I want to change my name")) {
                     changeName();
                 } else {
-                    outputString = "(" + getName() + ") " + outputString;
+                    outputString = getName() + " said : " + outputString;
                     printToAllClients(outputString);
-                    System.out.println("Server received " + outputString);
                 }
             }
         } catch (IOException e) {
