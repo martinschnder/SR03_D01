@@ -20,8 +20,7 @@ public class Server {
      */
     public static void main(String[] args) {
         ArrayList<ServerThread> threadList = new ArrayList<>();
-        try {
-            ServerSocket serverSocket = new ServerSocket(20000);
+        try (ServerSocket serverSocket = new ServerSocket(20000)) {
             while (true) {
                 System.out.println("Waiting for new client...");
                 Socket socket = serverSocket.accept();
