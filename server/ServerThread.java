@@ -8,6 +8,7 @@ import java.io.PrintWriter;
 // import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class ServerThread extends Thread {
     private Socket socket;
@@ -30,8 +31,13 @@ public class ServerThread extends Thread {
                 if (outputString.equals("exit")) {
                     break;
                 }
-                printToAllClients(outputString);
-                System.out.println("Server received " + outputString);
+                if (outputString.equals("I want to change my name")) {
+                    changeName();
+                } else {
+                    outputString = "(" + getName() + ") " + outputString;
+                    printToAllClients(outputString);
+                    System.out.println("Server received " + outputString);
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +49,30 @@ public class ServerThread extends Thread {
             if (sT != this) {
                 sT.output.println(outputString);
             }
+        }
+    }
+
+    private void changeName() {
+        try {
+            BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            String userInput;
+            String clientName = "empty";
+            while (clientName.equals("empty")) {
+                this.output.println("Enter your name :");
+                userInput = input.readLine();
+                clientName = userInput;
+                for (ServerThread sT : threadList) {
+                    if (sT.getName().equals(clientName)) {
+                        clientName = "empty";
+                        break;
+                    }
+                }
+                if (!clientName.equals("empty")) {
+                    this.setName(clientName);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }

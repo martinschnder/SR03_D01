@@ -9,13 +9,13 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("192.168.1.53", 20000);
+            Socket socket = new Socket("192.168.1.62", 20000);
             // BufferedReader input = new BufferedReader(new
             // InputStreamReader(socket.getInputStream()));
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
             Scanner scanner = new Scanner(System.in);
-            String userInput;
+            String userInput = "hello";
             // String response;
             String clientName = "empty";
             ClientThread clientThread = new ClientThread(socket);
@@ -23,18 +23,12 @@ public class Client {
 
             do {
                 if (clientName.equals("empty")) {
-                    System.out.println("Enter youre name :");
-                    userInput = scanner.nextLine();
-                    clientName = userInput;
-                    output.println(userInput + " joined the group");
-                    if (userInput.equals("exit")) {
-                        break;
-                    }
+                    output.println("I want to change my name");
+                    clientName = "notempty";
                 } else {
-                    String message = ("(" + clientName + ") message: ");
                     // System.out.print(message);
                     userInput = scanner.nextLine();
-                    output.println(message + " " + userInput);
+                    output.println(userInput);
                     if (userInput.equals("exit")) {
                         break;
                     }
