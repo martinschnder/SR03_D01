@@ -29,7 +29,7 @@ public class ServerThread extends Thread {
             while (true) {
                 String outputString = input.readLine();
                 if (outputString == null) {
-                    System.out.println("A client has disconnected");
+                    System.out.println(this.getName() + " has disconnected");
                     break;
                 }
                 if (outputString.equals("exit")) {
@@ -73,6 +73,9 @@ public class ServerThread extends Thread {
                 }
                 if (!clientName.equals("empty")) {
                     this.setName(clientName);
+                    this.output.println("-------------------------");
+                    String outputString = this.getName() + " has join the chat";
+                    printToAllClients(outputString);
                 }
             }
         } catch (Exception e) {
