@@ -24,7 +24,7 @@ public class Client {
                     userInput = scanner.nextLine();
                     if (userInput.equals("exit")) {
                         System.out.println("You have been disconnected.");
-                        break;
+                        System.exit(0);
                     }
                     output.println(userInput);
                 }
