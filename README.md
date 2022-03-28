@@ -1,8 +1,13 @@
 # Application de chat multi-thread en Java #
 ## SR03 Devoir 1 ##
 
-### Usage : ###
-  Cloner le repo git:
+### Objectif : ###
+Développer une application de chat Client/Serveur via les sockets qui permet d’organiser une
+discussion publique entre un ensemble de participants. La discussion dans cette application sera
+affichée dans la console.
+
+### Utilisation : ###
+  Cloner le repo git :
   ```
   git clone https://github.com/martinschnder/SR03_D01.git
   cd SR03_D01
