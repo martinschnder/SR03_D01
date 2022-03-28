@@ -30,10 +30,16 @@ public class Client {
             clientThread.start();
 
             do {
+                /**
+                 * if client has no name, it sends a request to the server to change its name
+                 */
                 if (noClientName == true) {
                     output.println("I want to change my name");
                     noClientName = false;
                 } else {
+                    /**
+                     * scanning the user input and sending it to the server
+                     */
                     userInput = scanner.nextLine();
                     if (userInput.equals("exit")) {
                         System.out.println("You have been disconnected.");
