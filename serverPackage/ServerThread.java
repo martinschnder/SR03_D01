@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  * Thread of the server
- * Intercept messages send in the socket
+ * Intercept messages sent into the socket
  * 
  * @author Martin Schneider
  * @author Océane Bordeau
@@ -146,7 +146,7 @@ public class ServerThread extends Thread {
                 noClientName = false;
                 for (ServerThread sT : getThreadList()) {
                     /**
-                     * check all the thread's name in the thread's list
+                     * check all the thread's name in the thread list
                      */
                     if (sT.getName().equals(clientName)) {
                         /**
@@ -158,7 +158,7 @@ public class ServerThread extends Thread {
                 }
                 if (!noClientName) {
                     /**
-                     * the name is not already use, we change the thread's name
+                     * the name is not already use, we change the thread name
                      */
                     if (name > 0) {
                         /**
