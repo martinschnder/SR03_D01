@@ -25,7 +25,7 @@ public class ServerThread extends Thread {
     public void run() {
         try {
             BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-
+            Integer name = 0;
             while (true) {
                 String outputString = input.readLine();
                 if (outputString == null) {
@@ -36,7 +36,8 @@ public class ServerThread extends Thread {
                     break;
                 }
                 if (outputString.equals("I want to change my name")) {
-                    changeName();
+                    changeName(name);
+                    name++;
                 } else {
                     outputString = getName() + " said : " + outputString;
                     printToAllClients(outputString);
@@ -55,7 +56,7 @@ public class ServerThread extends Thread {
         }
     }
 
-    private void changeName() {
+    private void changeName(Integer name) {
         try {
             BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
             String userInput;
@@ -71,10 +72,16 @@ public class ServerThread extends Thread {
                     }
                 }
                 if (!clientName.equals("empty")) {
-                    this.setName(clientName);
-                    this.output.println("-------------------------");
-                    String outputString = this.getName() + " has join the chat";
-                    printToAllClients(outputString);
+                    if (name > 0) {
+                        String outputString = this.getName() + " has changed his name to " + clientName;
+                        printToAllClients(outputString);
+                        this.setName(clientName);
+                    } else {
+                        this.setName(clientName);
+                        this.output.println("-------------------------");
+                        String outputString = this.getName() + " has join the chat";
+                        printToAllClients(outputString);
+                    }
                 }
             }
         } catch (Exception e) {
