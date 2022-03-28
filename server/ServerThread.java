@@ -1,7 +1,6 @@
 package server;
 
 import java.io.BufferedReader;
-// import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -82,18 +81,20 @@ public class ServerThread extends Thread {
         try {
             BufferedReader input = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             String userInput;
-            String clientName = "empty";
-            while (clientName.equals("empty")) {
+            String clientName = "";
+            Boolean noClientName = true;
+            while (noClientName) {
                 getOutput().println("Enter your name :");
                 userInput = input.readLine();
                 clientName = userInput;
+                noClientName = false;
                 for (ServerThread sT : getThreadList()) {
                     if (sT.getName().equals(clientName)) {
-                        clientName = "empty";
+                        noClientName = true;
                         break;
                     }
                 }
-                if (!clientName.equals("empty")) {
+                if (!noClientName) {
                     if (name > 0) {
                         String outputString = getName() + " has changed his name to " + clientName;
                         printToAllClients(outputString);

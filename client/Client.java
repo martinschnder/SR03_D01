@@ -7,19 +7,19 @@ import java.util.Scanner;
 public class Client {
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("192.168.1.53", 20000);
+            Socket socket = new Socket("192.168.1.62", 20000);
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
             Scanner scanner = new Scanner(System.in);
-            String userInput = "hello";
-            String clientName = "empty";
+            String userInput = "";
+            Boolean noClientName = true;
             ClientThread clientThread = new ClientThread(socket);
             clientThread.start();
 
             do {
-                if (clientName.equals("empty")) {
+                if (noClientName == true) {
                     output.println("I want to change my name");
-                    clientName = "notempty";
+                    noClientName = false;
                 } else {
                     userInput = scanner.nextLine();
                     if (userInput.equals("exit")) {
