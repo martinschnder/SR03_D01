@@ -16,20 +16,44 @@ public class ServerThread extends Thread {
     private PrintWriter output;
 
     public ServerThread(Socket socket, ArrayList<ServerThread> threadList) throws IOException {
+        setSocket(socket);
+        setThreadList(threadList);
+        setOutput(new PrintWriter(socket.getOutputStream(), true));
+    }
+
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public ArrayList<ServerThread> getThreadList() {
+        return threadList;
+    }
+
+    public PrintWriter getOutput() {
+        return output;
+    }
+
+    public void setSocket(Socket socket) {
         this.socket = socket;
+    }
+
+    public void setThreadList(ArrayList<ServerThread> threadList) {
         this.threadList = threadList;
-        this.output = new PrintWriter(socket.getOutputStream(), true);
+    }
+
+    public void setOutput(PrintWriter output) {
+        this.output = output;
     }
 
     @Override
     public void run() {
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             Integer name = 0;
             while (true) {
                 String outputString = input.readLine();
                 if (outputString == null) {
-                    System.out.println(this.getName() + " has disconnected");
+                    System.out.println(getName() + " has disconnected");
                     break;
                 }
                 if (outputString.equals("exit")) {
@@ -49,7 +73,7 @@ public class ServerThread extends Thread {
     }
 
     private void printToAllClients(String outputString) {
-        for (ServerThread sT : threadList) {
+        for (ServerThread sT : getThreadList()) {
             if (sT != this) {
                 sT.output.println(outputString);
             }
@@ -58,14 +82,14 @@ public class ServerThread extends Thread {
 
     private void changeName(Integer name) {
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(getSocket().getInputStream()));
             String userInput;
             String clientName = "empty";
             while (clientName.equals("empty")) {
-                this.output.println("Enter your name :");
+                getOutput().println("Enter your name :");
                 userInput = input.readLine();
                 clientName = userInput;
-                for (ServerThread sT : threadList) {
+                for (ServerThread sT : getThreadList()) {
                     if (sT.getName().equals(clientName)) {
                         clientName = "empty";
                         break;
@@ -73,13 +97,13 @@ public class ServerThread extends Thread {
                 }
                 if (!clientName.equals("empty")) {
                     if (name > 0) {
-                        String outputString = this.getName() + " has changed his name to " + clientName;
+                        String outputString = getName() + " has changed his name to " + clientName;
                         printToAllClients(outputString);
-                        this.setName(clientName);
+                        setName(clientName);
                     } else {
-                        this.setName(clientName);
-                        this.output.println("-------------------------");
-                        String outputString = this.getName() + " has join the chat";
+                        setName(clientName);
+                        getOutput().println("-------------------------");
+                        String outputString = getName() + " has join the chat";
                         printToAllClients(outputString);
                     }
                 }
