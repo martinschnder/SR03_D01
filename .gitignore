@@ -1,4 +1,4 @@
-client/ClientThread.class
-server/ServerThread.class
-server/Server.class
-client/Client.class
+clientPackage/ClientThread.class
+serverPackage/ServerThread.class
+serverPackage/Server.class
+clientPackage/Client.class
