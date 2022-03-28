@@ -22,7 +22,7 @@ public class ClientThread extends Thread {
                 String response = input.readLine();
                 if (response == null) {
                     System.out.println("Server has disconnected");
-                    break;
+                    System.exit(0);
                 }
                 System.out.println(response);
             }
