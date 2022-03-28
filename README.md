@@ -20,7 +20,7 @@ affichée dans la console.
   ```
   java serverPackage.Server
   ```
-  Lancer les clients dans d'autres terminal :
+  Lancer les clients dans d'autres terminaux :
   ```
   java clientPackage.Client
   ```
