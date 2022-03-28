@@ -4,10 +4,23 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * main Client class
+ * 
+ * @author Océane Bordeau
+ * @author Martin Schneider
+ */
 public class Client {
+
+    /**
+     * @param args
+     * 
+     *             extension of Thread class
+     *             print the messages received from the server
+     */
     public static void main(String[] args) {
         try {
-            Socket socket = new Socket("192.168.1.62", 20000);
+            Socket socket = new Socket("192.168.1.53", 20000);
             PrintWriter output = new PrintWriter(socket.getOutputStream(), true);
 
             Scanner scanner = new Scanner(System.in);

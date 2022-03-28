@@ -30,9 +30,9 @@ public class Server {
                 threadList.add(serverThread);
                 serverThread.start();
             }
+
         } catch (Exception e) {
             System.out.println("Error occured in main: " + e.getStackTrace());
         }
-
     }
 }
