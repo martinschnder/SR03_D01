@@ -20,6 +20,9 @@ public class ClientThread extends Thread {
         try {
             while (true) {
                 String response = input.readLine();
+                if (response == null) {
+                    System.out.println("Server has disconnected");
+                }
                 System.out.println(response);
             }
         } catch (IOException e) {

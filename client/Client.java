@@ -22,10 +22,11 @@ public class Client {
                     clientName = "notempty";
                 } else {
                     userInput = scanner.nextLine();
-                    output.println(userInput);
                     if (userInput.equals("exit")) {
+                        System.out.println("You have been disconnected.");
                         break;
                     }
+                    output.println(userInput);
                 }
             } while (!userInput.equals("exit"));
 

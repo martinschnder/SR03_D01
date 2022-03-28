@@ -8,7 +8,7 @@ import java.io.PrintWriter;
 // import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-import java.util.Scanner;
+// import java.util.Scanner;
 
 public class ServerThread extends Thread {
     private Socket socket;
@@ -24,7 +24,7 @@ public class ServerThread extends Thread {
     @Override
     public void run() {
         try {
-            BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            BufferedReader input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 
             while (true) {
                 String outputString = input.readLine();
