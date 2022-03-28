@@ -7,8 +7,7 @@ import java.util.ArrayList;
 public class Serveur {
     public static void main(String[] args) {
         ArrayList<ServerThread> threadList = new ArrayList<>();
-        try {
-            ServerSocket serveurSocket = new ServerSocket(20000);
+        try (ServerSocket serveurSocket = new ServerSocket(20000)) {
             while (true) {
                 System.out.println("Waiting for new client...");
                 Socket socket = serveurSocket.accept();
@@ -17,6 +16,7 @@ public class Serveur {
                 threadList.add(serverThread);
                 serverThread.start();
             }
+
         } catch (Exception e) {
             System.out.println("Error occured in main: " + e.getStackTrace());
         }
