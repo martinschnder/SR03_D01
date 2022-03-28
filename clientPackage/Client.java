@@ -13,10 +13,10 @@ import java.util.Scanner;
 public class Client {
 
     /**
-     * @param args
+     * extension of Thread class
+     * print the messages received from the server
      * 
-     *             extension of Thread class
-     *             print the messages received from the server
+     * @param args
      */
     public static void main(String[] args) {
         try {
