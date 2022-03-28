@@ -10,16 +10,32 @@ public class ClientThread extends Thread {
     private Socket socket;
     private BufferedReader input;
 
-    public ClientThread(Socket socket) throws IOException {
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public BufferedReader getInput() {
+        return input;
+    }
+
+    public void setSocket(Socket socket) {
         this.socket = socket;
-        this.input = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+    }
+
+    public void setInput(BufferedReader input) {
+        this.input = input;
+    }
+
+    public ClientThread(Socket socket) throws IOException {
+        setSocket(socket);
+        setInput(new BufferedReader(new InputStreamReader(getSocket().getInputStream())));
     }
 
     @Override
     public void run() {
         try {
             while (true) {
-                String response = input.readLine();
+                String response = getInput().readLine();
                 if (response == null) {
                     System.out.println("Server has disconnected");
                     System.exit(0);
@@ -30,7 +46,7 @@ public class ClientThread extends Thread {
             e.printStackTrace();
         } finally {
             try {
-                input.close();
+                getInput().close();
             } catch (Exception e) {
                 e.printStackTrace();
             }
