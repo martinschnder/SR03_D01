@@ -2,20 +2,20 @@
 ## SR03 Devoir 1 ##
 
 ### Usage : ###
-  clone the git repo:
+  cloner le repo git:
   ```
   git clone https://github.com/martinschnder/SR03_D01.git
   cd SR03_D01
   ```
-  compile the java classes :
+  compiler les classes java :
   ```
   javac serverPackage/Server.java clientPackage/Client.java
   ```
-  run server in a shell :
+  lancer le serveur dans un terminal :
   ```
   java serverPackage.Server
   ```
-  run clients in other shells :
+  lancer les clients dans d'autres terminal :
   ```
   java clientPackage.Client
   ```
